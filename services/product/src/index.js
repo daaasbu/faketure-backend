@@ -1,16 +1,23 @@
+require("dotenv").config();
+
 const express = require('express');
 const app = express();
 const { json } = require("body-parser");
+
 
 const { getClient } = require('./mongo-service');
 
 app.use(json());
 
 app.use(async (req, res, next) => {
+    try {
     const client = await getClient();
     const db = await client.db();
     req.db = db.collection('products');
     next();
+    } catch (e) {
+        console.log(e);
+    }
 })
 
 app.get('/alive', async (req, res) => {
@@ -64,6 +71,6 @@ app.get('/products/page/:page/size/:size', async (req, res) => {
     }
 })
 
-app.listen(8080, function () {
-
+app.listen(8004, function () {
+    console.log('listening on 8080');
 })
