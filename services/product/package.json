@@ -2,9 +2,8 @@
   "name": "product-service",
   "version": "1.0.0",
   "description": "CRUD operations for products",
-  "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "nodemon src/index.js"
   },
   "author": "Dana Asbury",
   "license": "ISC",
