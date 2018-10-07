@@ -13,6 +13,14 @@ app.use(async (req, res, next) => {
     next();
 })
 
+app.get('/alive', async (req, res) => {
+    res.send();
+})
+
+app.get('/ready', async (req, res) => {
+    res.send();
+})
+
 app.post('/products', async (req, res) => {
     try {
         const { products } = req.body;
