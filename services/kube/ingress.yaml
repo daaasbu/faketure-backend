@@ -17,3 +17,7 @@ spec:
         backend:
           serviceName: product-product
           servicePort: 8080
+      - path: /cart/
+          backend:
+            serviceName: cart-cart
+            servicePort: 8080
