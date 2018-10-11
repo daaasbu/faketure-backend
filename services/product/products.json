@@ -1,0 +1,55 @@
+[
+    {
+        "name": "Divano Roma",
+        "category": "Couches",
+        "features": [
+            {
+                "color": "green",
+                "price": 200.00,
+                "url": "https://faketure.blob.core.windows.net/images/Couches/Divano%20Roma/green.jpg"
+            },
+            {
+                "color": "orange",
+                "price": 210.00,
+                "url": "https://faketure.blob.core.windows.net/images/Couches/Divano%20Roma/orange.jpg"
+            },
+            {
+                "color": "purple",
+                "price": 190.00,
+                "url": "https://faketure.blob.core.windows.net/images/Couches/Divano%20Roma/purple.jpg"
+            }
+        ]
+    },
+    {
+        "name": "Linen Tufted Couch",
+        "category": "Couches",
+        "features": [
+            {
+                "color": "gray",
+                "price": 300.00,
+                "url": "https://faketure.blob.core.windows.net/images/Couches/Linen%20Tufted%20Couch/gray.jpg"
+            },
+            {
+                "color": "red",
+                "price": 100.00,
+                "url": "https://faketure.blob.core.windows.net/images/Couches/Linen%20Tufted%20Couch/red.jpg"
+            }
+        ]
+    },
+    {
+        "name": "Microfiber Futon",
+        "category": "Couches",
+        "features": [
+            {
+                "color": "gray",
+                "price": 300.00,
+                "url": "https://faketure.blob.core.windows.net/images/Couches/Microfiber%20Futon/gray.jpg"
+            },
+            {
+                "color": "black",
+                "price": 100.00,
+                "url": "https://faketure.blob.core.windows.net/images/Couches/Microfiber%20Futon/black.jpg"
+            }
+        ]
+    }
+]
