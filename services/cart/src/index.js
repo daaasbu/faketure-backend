@@ -2,11 +2,13 @@ require("dotenv").config();
 
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const { json } = require("body-parser");
 
 
 const { getClient } = require('./mongo-service');
 
+app.use(cors());
 app.use(json());
 
 app.use(async (req, res, next) => {
