@@ -7,16 +7,21 @@ const { json } = require("body-parser");
 
 
 const { getClient } = require('./mongo-service');
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
-app.use(cors());
+
 app.use(json());
 
 app.use(async (req, res, next) => {
     try {
-    const client = await getClient();
-    const db = await client.db();
-    req.db = db.collection('cart');
-    next();
+        const client = await getClient();
+        const db = await client.db();
+        req.db = db.collection('cart');
+        next();
     } catch (e) {
         console.log(e);
     }
@@ -29,7 +34,7 @@ app.get('/alive', async (req, res) => {
 app.get('/ready', async (req, res) => {
     res.send();
 })
-app.post('/all', async (req, res) => {
+app.post('/cart/all', async (req, res) => {
     try {
         const { carts } = req.body;
 
@@ -41,7 +46,7 @@ app.post('/all', async (req, res) => {
     }
 })
 
-app.get('/:sessionId', async (req, res) => {
+app.get('/cart/:sessionId', async (req, res) => {
     try {
         const { sessionId } = req.params;
         const cart = await req.db.find({ sessionId }).toArray();
@@ -52,10 +57,10 @@ app.get('/:sessionId', async (req, res) => {
     }
 })
 
-app.post('/', async (req, res) => {
+app.post('/cart', async (req, res) => {
     try {
-        const { cart } = req.body;
-        await req.db.insert(cart);
+        const { item } = req.body;
+        await req.db.update({ _id: item.requestId }, { ...item, _id: item.requestId }, { upsert: true });
         res.send();
     } catch (e) {
         res.status(500).send();
