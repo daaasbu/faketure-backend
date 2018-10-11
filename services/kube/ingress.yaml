@@ -6,11 +6,16 @@ metadata:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
     ingress.kubernetes.io/rewrite-target: /
 
 spec:
+  tls:
+    - hosts:
+      - faketure-aks-ingress.centralus.cloudapp.azure.com
+      secretName: tls-secret
   rules:
-  - host:
+  - host: faketure-aks-ingress.centralus.cloudapp.azure.com
     http:
       paths:
       - path: /product/
