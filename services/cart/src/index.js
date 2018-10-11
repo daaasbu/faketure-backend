@@ -13,7 +13,7 @@ app.use(async (req, res, next) => {
     try {
     const client = await getClient();
     const db = await client.db();
-    req.db = db.collection('products');
+    req.db = db.collection('cart');
     next();
     } catch (e) {
         console.log(e);
@@ -27,12 +27,11 @@ app.get('/alive', async (req, res) => {
 app.get('/ready', async (req, res) => {
     res.send();
 })
-
-app.post('/products', async (req, res) => {
+app.post('/all', async (req, res) => {
     try {
-        const { products } = req.body;
+        const { carts } = req.body;
 
-        await req.db.insertMany(products);
+        await req.db.insertMany(carts);
         res.send();
 
     } catch (e) {
@@ -40,32 +39,22 @@ app.post('/products', async (req, res) => {
     }
 })
 
-app.get('/products/:category', async (req, res) => {
+app.get('/:sessionId', async (req, res) => {
     try {
-        const { category } = req.params;
-        const product = await req.db.find({ category }).toArray();
-        res.json(product);
+        const { sessionId } = req.params;
+        const cart = await req.db.find({ sessionId }).toArray();
+        res.json(cart);
     } catch (e) {
         console.log(e);
         res.status(500).send();
     }
 })
 
-app.get('/products', async (req, res) => {
+app.post('/', async (req, res) => {
     try {
-    const products = await req.db.find().toArray();
-    res.send(products);
-    } catch (e) {
-        res.status(500).send();
-    }
-})
-
-app.get('/products/page/:page/size/:size', async (req, res) => {
-    try {
-    const {page, size} = req.params;
-    const index = (page-1) * size;
-    const products = await req.db.find().skip(index).limit(+size).toArray();
-    res.send(products);
+        const { cart } = req.body;
+        await req.db.insert(cart);
+        res.send();
     } catch (e) {
         res.status(500).send();
     }
